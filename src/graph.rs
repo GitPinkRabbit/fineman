@@ -1,3 +1,5 @@
+use crate::graph;
+
 #[derive(Debug, Clone)]
 pub struct Graph {
     pub n: usize,
@@ -141,7 +143,7 @@ impl ProperGraph {
 }
 
 impl From<SimpleGraph> for ProperGraph {
-    fn from(graph: SimpleGraph) -> Self {
+    fn from(mut graph: SimpleGraph) -> Self {
         let n = graph.n;
         let m: usize = graph.edges.iter().map(|v| v.len()).sum();
         if m == 0 {
@@ -150,6 +152,21 @@ impl From<SimpleGraph> for ProperGraph {
                 edges: graph.edges,
             };
         }
+        let (mut cur_n, mut cur_m) = (n, m);
+        for u in 0..n {
+            let minw = match graph.edges[u].iter().map(|&(_, w)| w).min() {
+                None | Some(0..) => continue,
+                Some(w) => w,
+            };
+            graph.edges.push(Vec::new());
+            graph.edges.swap(u, cur_n);
+            graph.edges[cur_n].iter_mut().for_each(|(_, w)| *w -= minw);
+            graph.edges[u].push((cur_n, minw));
+            cur_n += 1;
+            cur_m += 1;
+        }
+        let (n, m) = (cur_n, cur_m);
+        let graph = graph;
         let degree_bound = (2 * m).div_ceil(n) + 1;
         debug_assert!(degree_bound >= 2);
         let outdeg = graph.edges.iter().map(|v| v.len()).collect::<Vec<_>>();
