@@ -71,7 +71,7 @@ impl PricedGraph {
         //     return;
         // }
         self.sanity_check();
-        assert!(self.nedges.iter().map(|edges_u| edges_u.len()).sum::<usize>() == 0);
+        assert!(self.nedges.iter().all(|edges| edges.is_empty()));
     }
 
     pub fn apply_price(&mut self, p: &[i64]) {
