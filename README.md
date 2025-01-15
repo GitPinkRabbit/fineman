@@ -29,11 +29,11 @@
 - 经过的负边数，即 $h = \lvert \{ i : w(u_i, u_{i + 1}) < 0 \} \rvert$。
 - 定义两点 $(u, v)$ 间的 **$\boldsymbol{h}$ 跳距离** $\mathop{\text{dist}}\nolimits^h(u \rightsquigarrow v)$ 为它们之间不超过 $h$ 跳的路径的最短路径长度。若不存在则定义为 $+\infty$。
 - 简单性质：
-  - $\mathop{\text{dist}}\nolimits^h(u \rightsquigarrow v) < \mathop{\text{dist}}\nolimits^{h'}(u \rightsquigarrow v)$（ $h' < h$）。
+  - $\mathop{\text{dist}}\nolimits^h(u \rightsquigarrow v) < \mathop{\text{dist}}\nolimits^{h'}(u \rightsquigarrow v)$（ $h' < h$）。
   - 即 $\mathop{\text{dist}}\nolimits^h$ 随 $h$ 的增加而降低。
-  - $\mathop{\text{dist}}\nolimits^h$ 不能为 $-\infty$（与之相对地， $\mathop{\text{dist}}\nolimits$ 可以为 $-\infty$，即当图中存在负环时）。
-  - 若图中不存在负环，则 $\mathop{\text{dist}}\nolimits^h$ 随 $h$ 的增加而降低是有限度的，即当 $h$ 增加至两点间最短路的跳数后， $\mathop{\text{dist}}\nolimits^h$ 将不再变化。
-- 对点集 $S, T$ 也可以定义 $\mathop{\text{dist}}\nolimits^h(S \rightsquigarrow v)$、 $\mathop{\text{dist}}\nolimits^h(u \rightsquigarrow T)$ 和 $\mathop{\text{dist}}\nolimits^h(S \rightsquigarrow T)$。性质类似。
+  - $\mathop{\text{dist}}\nolimits^h$ 不能为 $-\infty$（与之相对地， $\mathop{\text{dist}}\nolimits$ 可以为 $-\infty$，即当图中存在负环时）。
+  - 若图中不存在负环，则 $\mathop{\text{dist}}\nolimits^h$ 随 $h$ 的增加而降低是有限度的，即当 $h$ 增加至两点间最短路的跳数后， $\mathop{\text{dist}}\nolimits^h$ 将不再变化。
+- 对点集 $S, T$ 也可以定义 $\mathop{\text{dist}}\nolimits^h(S \rightsquigarrow v)$、 $\mathop{\text{dist}}\nolimits^h(u \rightsquigarrow T)$ 和 $\mathop{\text{dist}}\nolimits^h(S \rightsquigarrow T)$。性质类似。
 
 **$\boldsymbol{h}$ 跳相关**：称 $(u, v)$ 是 **$\boldsymbol{h}$ 跳相关**的，当：
 
@@ -47,7 +47,7 @@
   $$R^h(S) = \{ v \in V : \mathop{\text{dist}}\nolimits^h(S \rightsquigarrow v) < 0 \} \text{。}$$
 - 简单性质：
   - $R^h(S) = \bigcup_{u \in S} R^h(u)$。
-  - $R^h(S) \supseteq R^{h'}(S)$（ $h' < h$）。
+  - $R^h(S) \supseteq R^{h'}(S)$（ $h' < h$）。
   - $(u, v)$ 是 $h$ 跳相关的当且仅当 $v \in R^h(u)$ 或 $u \in R^h(v)$。
 
 **$\boldsymbol{r}$ 遥远负点集/负边集/子图**：称一个负点集 $X \subseteq V^-$ 是 **$\boldsymbol{r}$ 遥远**的，当：
@@ -56,7 +56,7 @@
 - 进一步，这些负点所对应的负边形成的集合也称作 **$\boldsymbol{r}$ 遥远**的。
 - 进一步，称由 $R^r(X)$ 中的点形成的导出子图为 **$\boldsymbol{r}$ 遥远子图**。
 - 简单性质：
-  - $r$ 遥远蕴含 $r'$ 遥远（ $r' < r$）。
+  - $r$ 遥远蕴含 $r'$ 遥远（ $r' < r$）。
 
 **$\boldsymbol{1}$ 跳无关**：称一个点集 $I \subseteq V$（未必是负点的一个子集）是 **$\boldsymbol{1}$ 跳无关**的，当：
 
@@ -72,7 +72,7 @@
 
 **负夹心面包**：定义**负夹心面包**为满足如下条件的三元组 $(x, U, y)$：
 
-- $U \subseteq V^-$， $x, y \in V$。
+- $U \subseteq V^-$， $x, y \in V$。
 - $\mathop{\text{dist}}\nolimits^1(x \rightsquigarrow u) < 0$ 对所有 $u \in U$。
 - $\mathop{\text{dist}}\nolimits^1(u \rightsquigarrow y) < 0$ 对所有 $u \in U$。
 - 称该负夹心面包的大小为 $\lvert U \rvert$。
@@ -82,7 +82,7 @@
 Johnson 技巧 / pricing / 点势函数：
 
 - 函数 $\varphi \colon V \to \R$，定义新边权 $w_{\varphi}(u, v) = w(u, v) + \varphi(u) - \varphi(v)$。
-- 新图中的最短路保持不变，即 $\mathop{\text{dist}}\nolimits_\varphi(u \rightsquigarrow v) = \mathop{\text{dist}}\nolimits(u \rightsquigarrow v) + \varphi(u) - \varphi(v)$，或等价地， $\mathop{\text{dist}}\nolimits(u \rightsquigarrow v) = \mathop{\text{dist}}\nolimits_\varphi(u \rightsquigarrow v) - \varphi(u) + \varphi(v)$。
+- 新图中的最短路保持不变，即 $\mathop{\text{dist}}\nolimits_\varphi(u \rightsquigarrow v) = \mathop{\text{dist}}\nolimits(u \rightsquigarrow v) + \varphi(u) - \varphi(v)$，或等价地， $\mathop{\text{dist}}\nolimits(u \rightsquigarrow v) = \mathop{\text{dist}}\nolimits_\varphi(u \rightsquigarrow v) - \varphi(u) + \varphi(v)$。
 - 对于任意的 $\varphi$，需要保证它不会将非负边转为负边，即 $w_{\varphi}(u, v) \ge 0$ 对所有 $(u, v) \in E^+$。
 - 如果同时对一条负边 $(u, v)$ 有 $w(u, v) + \varphi(u) - \varphi(v) \ge 0$，就相当于消除了一条负边。
 - 这等价于 $\varphi(v) \le \varphi(u) + w(u, v)$。
@@ -94,10 +94,10 @@ Johnson 技巧 / pricing / 点势函数：
 $r$ 跳削减图：
 
 - 现有一张图 $G = (V, E^+ \cup E^-, w)$，目标是构造一张图 $H = (V_H, E_H, w_H)$，使得 $V \subseteq V_H$ 且：
-  - 在图 $H$ 中， $\mathop{\text{dist}}\nolimits_H(u \rightsquigarrow v) = \mathop{\text{dist}}\nolimits(u \rightsquigarrow v)$（对 $u, v \in V$），且一条 $G$ 中的 $h$ 跳路径对应一条 $H$ 中的 $\lceil h / r \rceil$ 跳路径。
+  - 在图 $H$ 中， $\mathop{\text{dist}}\nolimits_H(u \rightsquigarrow v) = \mathop{\text{dist}}\nolimits(u \rightsquigarrow v)$（对 $u, v \in V$），且一条 $G$ 中的 $h$ 跳路径对应一条 $H$ 中的 $\lceil h / r \rceil$ 跳路径。
   - 这里假设 $1 \le r \le \lvert E^- \rvert$。
 - 称这样的 $H$ 为 $G$ 的 **$\boldsymbol{r}$ 跳削减图**。
-- 即，在 $H$ 中，为求得距离函数，所需的 Dijkstra 趟数减少了：从原来的 $k + 1$ 趟（ $k = \lvert E^- \rvert$）变为 $\lceil k / r \rceil + 1$ 趟。
+- 即，在 $H$ 中，为求得距离函数，所需的 Dijkstra 趟数减少了：从原来的 $k + 1$ 趟（ $k = \lvert E^- \rvert$）变为 $\lceil k / r \rceil + 1$ 趟。
 - 一个一般的构造如下：
   - 将每个点复制 $r + 1$ 份，将点 $u$ 的复制称作 $u_0, \ldots, u_r$。把 $u$ 识别为 $u_0$。
   - 对每条 $G$ 中的非负边 $(u, v)$，连接同一层中的 $(u_i, v_i)$（对每一层 $0 \le i \le r$）。
@@ -109,25 +109,25 @@ $r$ 跳削减图：
   - 边权为 $w_H(u_i, v_j) = w(u, v) + \mathop{\text{dist}}\nolimits^i(V \rightsquigarrow u) - \mathop{\text{dist}}\nolimits^j(V \rightsquigarrow v)$。
   - 则根据 $\mathop{\text{dist}}\nolimits^{i + [w(u, v) < 0]}(V \rightsquigarrow v) \le \mathop{\text{dist}}\nolimits^i(V \rightsquigarrow u) + w(u, v)$，除了 $(u_i, u_0)$ 这些边，其他边权都 $\ge 0$。
   - 注：由于 $\mathop{\text{dist}}\nolimits^0(V \rightsquigarrow u) = 0$ 恒成立，有 $\varphi$ 在第 $0$ 层上恒为 $0$，故不影响 $\mathop{\text{dist}}\nolimits_H(u \rightsquigarrow v) = \mathop{\text{dist}}\nolimits(u \rightsquigarrow v)$ 成立。
-- 根据如上构造， $H$ 拥有 $O(r n)$ 个点， $O(r m)$ 条边。
+- 根据如上构造， $H$ 拥有 $O(r n)$ 个点， $O(r m)$ 条边。
 - 故 $\lceil k / r \rceil + 1$ 趟 Dijkstra 仍然需要 $O((k / r) (r m + r n \log r n)) = O(k (m + n \log n))$ 的时间，并未改变。
 
 消除 $r$ 遥远负边：
 
 - 如果负边集 $N$ 是 $r$ 遥远的，我们将看到，对上述 $r$ 跳削减图的更优构造大有裨益。
-- 设图 $G = (V^+ \cup V^-, E^+ \cup E^-, w)$，以及 $N \subseteq E^-$ 是负边集， $X \subseteq V^-$ 是对应的负点集。
+- 设图 $G = (V^+ \cup V^-, E^+ \cup E^-, w)$，以及 $N \subseteq E^-$ 是负边集， $X \subseteq V^-$ 是对应的负点集。
 - 忽略其余负边，得到图 $G_N = (V, E^+ \cup N, w)$。
 - 则在 $G_N$ 中，显然 $R^r(X)$ 只会更小，因为负边越来越少了。
-- 而图的总点数没有减少，故 $X$ 仍是 $r$ 遥远负点集， $N$ 仍是 $r$ 遥远负边集。
+- 而图的总点数没有减少，故 $X$ 仍是 $r$ 遥远负点集， $N$ 仍是 $r$ 遥远负边集。
 - 此时，在图 $G_N$ 中，如果一个点 $u$ 在 $r$ 遥远子图之外，即 $\mathop{\text{dist}}\nolimits_N^r(X \rightsquigarrow u) \ge 0$，则必有 $\mathop{\text{dist}}\nolimits_N^r(V \rightsquigarrow u) \ge 0$，因为从其他点（非负点）出发并不比从负点出发更优。又由于 $\mathop{\text{dist}}\nolimits_N^i(V \rightsquigarrow u)$ 必然 $\le 0$，因为空路径的权值为 $0$。我们有 $\mathop{\text{dist}}\nolimits_N^r(V \rightsquigarrow u) = 0$，因此每个 $\mathop{\text{dist}}\nolimits_N^i(V \rightsquigarrow u)$ 都 $= 0$（对每个 $0 \le i \le r$）。
 - 这就是说，对在 $r$ 遥远子图之外的点 $u$，有：
   - $w_H(u_i, v_j) = w(u, v) - \mathop{\text{dist}}\nolimits_N^j(V \rightsquigarrow v)$；
   - $w_H(v_i, u_j) = w(v, u) + \mathop{\text{dist}}\nolimits_N^i(V \rightsquigarrow v)$。
 - 即与所有 $u_i$ 相连的边的边权不取决于所在层数 $i$。故 $r + 1$ 个点 $u_0, \ldots, u_r$ 可以缩为一个点 $u_0 = u$。
-- 这样一来， $H$ 的点数就变成 $n + r \lvert R^r(X) \rvert$，边数就变成 $O(m + (m / n) r \lvert R^r(X) \rvert)$（这里利用了每个点的度数为 $O(m / n)$ 的性质）。
+- 这样一来， $H$ 的点数就变成 $n + r \lvert R^r(X) \rvert$，边数就变成 $O(m + (m / n) r \lvert R^r(X) \rvert)$（这里利用了每个点的度数为 $O(m / n)$ 的性质）。
 - 根据 $r$ 遥远子图的定义，有 $\lvert R^r(X) \rvert \le n / r$。故上述界改为点数 $O(n)$，边数 $O(m)$。
-- 即如果 $N$ 是 $r$ 遥远的， $r$ 跳削减图的大小可与原图同阶。
-- 构造上述 $r$ 跳削减图仍需要计算 $\mathop{\text{dist}}\nolimits^i(V \rightsquigarrow u)$（ $0 \le i \le r$），故需要 $O(r (m + n \log n))$ 时间。
+- 即如果 $N$ 是 $r$ 遥远的， $r$ 跳削减图的大小可与原图同阶。
+- 构造上述 $r$ 跳削减图仍需要计算 $\mathop{\text{dist}}\nolimits^i(V \rightsquigarrow u)$（ $0 \le i \le r$），故需要 $O(r (m + n \log n))$ 时间。
 - 对 $r$ 跳削减图求距离函数需要 $\lceil k / r \rceil + 1$ 遍 Dijkstra，这需要 $O((k / r) (m + n \log n))$ 时间。
 - 故加总得 $O((r + k / r) (m + n \log n))$ 时间。
 
@@ -163,7 +163,7 @@ $r$ 跳削减图：
 - 注意 $\mathop{\text{thru}}\nolimits_\varphi^\beta(u \rightsquigarrow x \rightsquigarrow v) = \mathop{\text{thru}}\nolimits^\beta(u \rightsquigarrow x \rightsquigarrow v) + \varphi(u) - \varphi(v)$，不取决于 $\varphi(x)$。
 - 故如果对某个点 $y$ 来说有 $\mathop{\text{thru}}\nolimits_\varphi^\beta < 0$，则考虑原 $\mathop{\text{thru}}\nolimits^\beta$，它必然是所有 $\mathop{\text{thru}}\nolimits^\beta$ 中比较小的。
 - 由于特殊点是随机选取的，而 $\mathop{\text{thru}}\nolimits^\beta$ 只要比某个特殊点 $x$ 的 $\mathop{\text{thru}}\nolimits^\beta$ 大，就有 $\mathop{\text{thru}}\nolimits_\varphi^\beta \ge 0$。
-- 对于一个特定的 $u \rightsquigarrow v$， $\mathop{\text{BW}}\nolimits^\beta(u \rightsquigarrow v) > n / \tau$ 的概率有上界：
+- 对于一个特定的 $u \rightsquigarrow v$， $\mathop{\text{BW}}\nolimits^\beta(u \rightsquigarrow v) > n / \tau$ 的概率有上界：
   - $[1, n]$ 中均匀随机选 $T = \Theta(\tau \log n)$ 个数，最小的数的编号大于 $n / \tau$ 的概率。
   - 即\ 
     $$\prod_{i = 0}^{T - 1} \frac{n - n / \tau - i}{n - i} \le \prod_{i = 0}^{T - 1} \frac{n - n / \tau}{n} = \Bigl( 1 - \frac{1}{\tau} \Bigr)^T = \biggl( \Bigl( 1 - \frac{1}{\tau} \Bigr)^{\tau} \biggr)^{\Theta(\log n)} \le \frac{1}{n^{\Theta(1)}} \text{。}$$
@@ -183,7 +183,7 @@ $r$ 跳削减图：
     - 对于后者，因为势函数不改变最短路本身，该距离函数把新图的边权变为非负，也即把原图的 $x \rightsquigarrow v$ 和 $v \rightsquigarrow x$ 的 $\beta$ 跳最短路变为非负，即 $\beta$ 跳距离非负。
 - 此算法时间复杂度为 $O(\beta \lvert T \rvert (m + n \log n) + \lvert T \rvert^2 n) = O(\beta \tau (m + n \log n) \log n + \tau^2 n \log^2 n)$。
 
-现在我们得到了一张间性足够小（ $\le n / \tau$）的图，接下来的问题是如何基于此找到足够大的 $r$ 遥远负边集或 $1$ 跳无关负边集。
+现在我们得到了一张间性足够小（ $\le n / \tau$）的图，接下来的问题是如何基于此找到足够大的 $r$ 遥远负边集或 $1$ 跳无关负边集。
 
 下面我们展示如何通过负夹心面包找到一个足够大的 $r$ 遥远负边集：
 
@@ -203,7 +203,7 @@ $r$ 跳削减图：
       \end{aligned}$$
   - $\varphi(u) = 0$ 对所有 $u \in U$。
     - 因为 $\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) < 0$，故取负后 $> 0$，取 $\max$ 后仍 $> 0$，再取 $\min$ 后 $= 0$。
-  - 对“大部分”其他点， $\varphi(v) \le \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v))$。
+  - 对“大部分”其他点， $\varphi(v) \le \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v))$。
     - 若 $v$ **不** $\beta$ 介于 $x \rightsquigarrow y$ 之间，有 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) + \mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y) \ge 0$。
     - 也即 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) \ge -\mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y)$。
     - 故 $\varphi(v) = \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v))$。
@@ -234,25 +234,25 @@ $r$ 跳削减图：
   - 在期望 $O((m + n \log n) \log n)$ 的时间内，得到以下三种结果之一：
     1. 汇报图中有负环；
     2. 找到一个大小为 $\Omega(\hat k / \rho)$ 的点集 $U \subseteq U_0$ 和一个点 $y \subseteq U_0$，满足 $\mathop{\text{dist}}\nolimits^1(u \rightsquigarrow y) < 0$ 对所有 $u \in U$；
-    3. 找到一个大小为 $\Omega(\rho)$ 的点集 $I \subseteq U_0$，满足 $I$ 是 $1$ 跳无关的（ $I$ 未必是负点的一个子集）。
+    3. 找到一个大小为 $\Omega(\rho)$ 的点集 $I \subseteq U_0$，满足 $I$ 是 $1$ 跳无关的（ $I$ 未必是负点的一个子集）。
   - **注：这里我修改了原文的算法的定义，使其不要求 $\boldsymbol{U_0}$ 是负点的一个子集。**
 - 不难看出，有了上述算法，并令 $U_0$ 为负点的一个子集，相当于每次可以找到“一半”的负夹心面包。所以有必要运行两趟上述算法，平衡指数可得：
   - 设 $\lvert V^- \rvert = k$。
-  - 第一遍，令 $U_0 = V^-$， $\rho = k^{1/3}$：
+  - 第一遍，令 $U_0 = V^-$， $\rho = k^{1/3}$：
     - 要么得到一个 $1$ 跳无关负点集 $I_1$，大小为 $\Omega(k^{1/3})$；
     - 要么得到一个大小为 $\Omega(k^{2/3})$ 的负点集 $U_1$ 和一个点 $y$，满足 $\mathop{\text{dist}}\nolimits^1(u \rightsquigarrow y) < 0$ 对所有 $u \in U_1$。
     - 若得到 $I_1$，则算法结束。
-  - 第二遍，令 $U_0 = U_1$， $\rho = k^{1/3}$，但在反向图上运行：
+  - 第二遍，令 $U_0 = U_1$， $\rho = k^{1/3}$，但在反向图上运行：
     - 这里需要注意，反向图上的负点并不是原来的负点，而是原来的负边的终点。
     - 所以令 $U_0 = U_1$ 时 $U_0$ 在反向图上并不是负点的一个子集，这就是为什么我修改了算法的定义。
     - 要么得到一个 $1$ 跳无关点集 $I_2$，大小为 $\Omega(k^{1/3})$：
       - 注：这里的 $I_2$ 不是反向图上的负点集，但确实是原图上的负点集。
-      - 在反向图上， $1$ 跳无关的描述为：对任意 $x, y \in I_2$ 有 $(\mathop{\text{dist}}\nolimits^1)^T(x \rightsquigarrow y) \ge 0$，注意上标 $T$ 表示反向图。
+      - 在反向图上， $1$ 跳无关的描述为：对任意 $x, y \in I_2$ 有 $(\mathop{\text{dist}}\nolimits^1)^T(x \rightsquigarrow y) \ge 0$，注意上标 $T$ 表示反向图。
       - 在原图中，这就等价于 $\mathop{\text{dist}}\nolimits^1(y \rightsquigarrow x) \ge 0$。
-      - 根据对称性可知， $I_2$ 是原图上的 $1$ 跳无关负点集。
+      - 根据对称性可知， $I_2$ 是原图上的 $1$ 跳无关负点集。
     - 要么得到一个大小为 $\Omega(k^{1/3})$ 的点集 $U_2 \subseteq U_1$ 和一个点 $x$，满足 $(\mathop{\text{dist}}\nolimits^1)^T(u \rightsquigarrow x) < 0$ 对所有 $u \in U_2$：
       - 同样地，这里的 $U_2$ 不是反向图上的负点集，但确实是原图上的负点集。
-      - 在原图中， $(\mathop{\text{dist}}\nolimits^1)^T(u \rightsquigarrow x) < 0$ 就等价于 $\mathop{\text{dist}}\nolimits^1(x \rightsquigarrow u) < 0$。
+      - 在原图中， $(\mathop{\text{dist}}\nolimits^1)^T(u \rightsquigarrow x) < 0$ 就等价于 $\mathop{\text{dist}}\nolimits^1(x \rightsquigarrow u) < 0$。
       - 结合 $\mathop{\text{dist}}\nolimits^1(u \rightsquigarrow y) < 0$ 对所有 $u \in U_2 \subseteq U_1$，可知 $(x, U_2, y)$ 是一个负夹心面包。
 - 接下来我们将展示如何实现上述算法。
 - 首先令记号 $C(U_0, v) = \lvert \{ u \in U_0 : \mathop{\text{dist}}\nolimits^1(u \rightsquigarrow v) < 0 \} \rvert$ 表示 $U_0$ 中负 $1$ 跳可达 $v$ 的点数。
@@ -275,8 +275,8 @@ $r$ 跳削减图：
   - 即重点在 $R^1(U')$ 中的概率 $q_\mathrm{H} \ge 6 / 7$，轻点在 $R^1(U')$ 中的概率 $q_\mathrm{L} \le 1 / 8$。
   - 且上述事件，固定一个重点或轻点后，在进行独立的对 $U'$ 的采样时，是独立的。
   - 故根据 Chernoff–Hoeffding 定理，重复 $\lceil c \ln n \rceil$ 次采样后，对固定的一个重点或轻点，它在 $R^1(U')$ 中的次数 $\ge \lceil c \ln n \rceil / 2$ 的概率有计算：
-    - 对重点， $\ge 1 - \Pr(X \le (1 / 2) \lceil c \ln n \rceil) \ge 1 - \Pr(X \le \mu - (q_\mathrm{H} - 1 / 2) \lceil c \ln n \rceil) \ge 1 - \biggl( \Bigl( \dfrac{q_\mathrm{H}}{1 / 2} \Bigr)^{1 / 2} \Bigl( \dfrac{1 - q_\mathrm{H}}{1 / 2} \Bigr)^{1 / 2} \biggr)^{\lceil c \ln n \rceil} \ge 1 - ((1 / \mathrm{e})^{1 / 3})^{\lceil c \ln n \rceil} \ge 1 - 1 / n^{c / 3}$。
-    - 对轻点，类似地， $\le 1 / n^{c / 3}$。
+    - 对重点， $\ge 1 - \Pr(X \le (1 / 2) \lceil c \ln n \rceil) \ge 1 - \Pr(X \le \mu - (q_\mathrm{H} - 1 / 2) \lceil c \ln n \rceil) \ge 1 - \biggl( \Bigl( \dfrac{q_\mathrm{H}}{1 / 2} \Bigr)^{1 / 2} \Bigl( \dfrac{1 - q_\mathrm{H}}{1 / 2} \Bigr)^{1 / 2} \biggr)^{\lceil c \ln n \rceil} \ge 1 - ((1 / \mathrm{e})^{1 / 3})^{\lceil c \ln n \rceil} \ge 1 - 1 / n^{c / 3}$。
+    - 对轻点，类似地， $\le 1 / n^{c / 3}$。
   - 再根据事件的并的概率不超过各事件概率之和，有所有重点都在 $H$ 中，所有轻点都在 $L$ 中的概率 $\ge 1 - 1 / n^{c / 3 - 1}$。
   - 上述算法的时间复杂度为 $O((m + n \log n) \log n)$，因为需要重复 $\Theta(\log n)$ 次采样和计算，而每次计算 $R^1(U')$ 的时间为 $O(m + n \log n)$。
 - 得到了 $H, L$ 两个集合后（假设确实满足所有重点都在 $H$ 中、所有轻点都在 $L$ 中），我们分类讨论：
@@ -292,7 +292,7 @@ $r$ 跳削减图：
     - 现在我们需要证明 $I$ 足够大。
     - $I'$ 中的一个点 $v$ **被其他点删去**的概率为：
       - 注：这里**被其他点删去**指的是 $v \in R^1(u)$ 对某个 $u \in I'$ 且 $u \ne v$。
-        - 相对地， $v$ 可能被自己删去，即 $v \in R^1(v)$，即 $\mathop{\text{dist}}\nolimits^1(v \rightsquigarrow v) < 0$，然而这意味着存在负环。
+        - 相对地， $v$ 可能被自己删去，即 $v \in R^1(v)$，即 $\mathop{\text{dist}}\nolimits^1(v \rightsquigarrow v) < 0$，然而这意味着存在负环。
       - 所有可能删去 $v$ 的 $u$ 的数量不超过 $C(U_0, v)$（可能不取等号，因为可能要扣掉 $v$ 自己）。
       - $I'$ 正好采样到它们中的至少一个的概率（条件概率，因为已知 $v \in I'$）不超过 $C(U_0, v) \frac{\lceil \rho / 4 \rceil - 1}{\hat k - 1}$。
       - 由于不存在重点，有 $C(U_0, v) < 2 \hat k / \rho$。
@@ -301,12 +301,12 @@ $r$ 跳削减图：
     - 故**因其他点而被删去**的总点数期望不超过 $(5 / 8) \lvert I' \rvert$。
     - 根据 Markov 不等式，**因其他点而被删去**的总点数不超过 $(3 / 4) \lvert I' \rvert$ 的概率至少为 $1 - \dfrac{5 / 8}{3 / 4} = \dfrac{1}{6}$。
     - 即**被留下**或**仅因自己而被删去**的点至少有 $\rho / 16$ 个，的概率至少为 $1 / 6$。
-    - 即，在不存在**仅因自己而被删去**的点的前提下， $I$ 至少有 $\rho / 16$ 个点的概率至少为 $1 / 6$。
+    - 即，在不存在**仅因自己而被删去**的点的前提下， $I$ 至少有 $\rho / 16$ 个点的概率至少为 $1 / 6$。
     - 那么，如何探测**仅因自己而被删去**的点呢？
       - 具体来说：只需跟踪每个点最短路的来源：如果 $v$ 仅因自己而被删去，那么它的距离是负数，且最短路的来源必然是它自己。
       - 同时，如果发现有的点的距离是负数且最短路的来源是它自己，就说明存在负环，可以直接结束算法。
     - 故，先确认不存在来源是自己且距离为负的点，就相当于确认了不存在**仅因自己而被删去**的点。然后 $I$ 至少有 $\rho / 16$ 个点的概率就有保证了。
-    - 故进行 $\Theta(\log n)$ 次（具体地， $\lceil c' \ln n \rceil$ 次）对 $I'$ 的采样，就能将找到满足大小 $\ge \rho / 16$ 的 $1$ 跳无关的 $I$ 的概率提升到 $1 - 1 / \mathop{\text{poly}}\nolimits(n)$。
+    - 故进行 $\Theta(\log n)$ 次（具体地， $\lceil c' \ln n \rceil$ 次）对 $I'$ 的采样，就能将找到满足大小 $\ge \rho / 16$ 的 $1$ 跳无关的 $I$ 的概率提升到 $1 - 1 / \mathop{\text{poly}}\nolimits(n)$。
     - 求出 $R^1(I')$ 的时间复杂度为 $O(m + n \log n)$。
     - 总时间复杂度为 $O((m + n \log n) \log n)$。
     - 如果若干次采样后都没有找到满足条件的 $I$，说明很可能 $H, L$ 的划分不正确，重启算法。
@@ -321,7 +321,7 @@ $r$ 跳削减图：
 - 然后我们需要有方法找到这两类负边，且找到的负边集足够大。
 - 对于 $r$ 遥远负边，构造了一类称作负夹心面包的结构：
   - 在间性足够小的图中，找到一个足够大的负夹心面包，就能得到一个足够大的 $r$ 遥远负边集。
-  - 具体来说，如果 $\mathop{\text{BW}}\nolimits^\beta(u \rightsquigarrow v) \le n / \tau$，且找到了一个负夹心面包 $(x, U, y)$，则经过一个合适的势函数后， $U$ 就是一个 $\min(\tau, \beta - 1)$ 遥远负边集。
+  - 具体来说，如果 $\mathop{\text{BW}}\nolimits^\beta(u \rightsquigarrow v) \le n / \tau$，且找到了一个负夹心面包 $(x, U, y)$，则经过一个合适的势函数后， $U$ 就是一个 $\min(\tau, \beta - 1)$ 遥远负边集。
   - 这个势函数在 $O(\beta (m + n \log n))$ 时间内可以计算出来。
 - 我们先想办法降低图的间性：
   - 存在一个随机算法，在 $O(\beta \tau (m + n \log n) \log n + \tau^2 n \log^2 n)$ 的时间内，以 $1 - 1 / \mathop{\text{poly}}\nolimits(n)$ 的概率找到一个势函数，使得新图中每对点的 $\beta$ 间性都 $\le n / \tau$。
@@ -340,7 +340,7 @@ $r$ 跳削减图：
 - 每次可以消除 $\Omega(k^{1/3})$ 条负边，重复如上过程 $\Theta(k^{2/3})$ 次，即可消除常数比例的负边。
 - 故总复杂度为 $O(n^{8/9} (m + n \log n) \log^{1/3} n)$，或写作 $O(m n^{8/9} \log^{1/3} n + n^{17/9} \log^{4/3} n)$。
 
-注： $m$ 上比 $n$ 少一个 $\log n$ 是因为默认 Dijkstra 使用了 Fibonacci 堆。代码实现中直接用的二叉堆，会多一个 $\log n$。
+注： $m$ 上比 $n$ 少一个 $\log n$ 是因为默认 Dijkstra 使用了 Fibonacci 堆。代码实现中直接用的二叉堆，会多一个 $\log n$。
 
 ## 附
 
