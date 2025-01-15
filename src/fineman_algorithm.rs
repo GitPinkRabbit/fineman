@@ -27,6 +27,22 @@ impl PricedGraph {
         }
     }
 
+    pub fn sanity_check(&self) {
+        // if cfg!(not(debug_assertions)) {
+        //     return;
+        // }
+        let n = self.n;
+        assert_eq!(self.pedges.len(), n);
+        assert_eq!(self.pedges_rev.len(), n);
+        assert_eq!(self.nedges.len(), n);
+        assert_eq!(self.nedges_rev.len(), n);
+        assert_eq!(self.prices.len(), n);
+        assert_eq!(self.pedges.iter().all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)), true);
+        assert_eq!(self.pedges_rev.iter().all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)), true);
+        assert_eq!(self.nedges.iter().all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)), true);
+        assert_eq!(self.nedges_rev.iter().all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)), true);
+    }
+
     pub fn apply_price(&mut self, p: &[i64]) {
         for (u, edges_u) in self.pedges.iter_mut().enumerate() {
             for (v, w) in edges_u.iter_mut() {
@@ -51,11 +67,13 @@ impl PricedGraph {
         for (u, price_u) in self.prices.iter_mut().enumerate() {
             *price_u += p[u];
         }
+        self.sanity_check();
     }
 
     pub fn unapply_price(&mut self, p: &[i64]) {
         let p_neg: Vec<_> = p.iter().map(|&x| -x).collect();
         self.apply_price(&p_neg);
+        self.sanity_check();
     }
 }
 
