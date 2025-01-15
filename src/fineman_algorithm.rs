@@ -127,15 +127,20 @@ pub fn bellman_ford_dijkstra_with_hops_bound(
 ) -> Result<Vec<i64>, ()> {
     let mut dist = dijkstra(graph, vec![Some(0); graph.n]);
     for _ in 0..h {
+        let mut relaxed = false;
         let mut ndist = dist.clone();
         for (u, &dist_u) in dist.iter().enumerate() {
             if let Some(d) = dist_u {
                 for &(v, w, t) in &graph.nedges[u] {
                     if t && ndist[v].unwrap() < d + w {
                         ndist[v] = Some(d + w);
+                        relaxed = true;
                     }
                 }
             }
+        }
+        if !relaxed {
+            return Ok(dist.into_iter().map(|d| d.unwrap()).collect());
         }
         dist = dijkstra(graph, ndist);
     }
