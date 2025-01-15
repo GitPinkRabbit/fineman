@@ -52,7 +52,18 @@ fn eliminate_once(graph: &mut PricedGraph) -> Result<(), ()> {
 }
 
 fn eliminate_independent_set(graph: &mut PricedGraph, i: &[usize]) {
-    unimplemented!()
+    let mut b = vec![0; graph.n];
+    for &u in i {
+        b[u] = 1;
+    }
+    let b = b;
+    for (u, ne) in graph.nedges.iter_mut().enumerate() {
+        for (_, _, t) in ne.iter_mut() {
+            *t = b[u] == 1;
+        }
+    }
+    let p = bellman_ford_dijkstra_with_hops_bound(graph.as_borrowed(), 1).unwrap();
+    graph.apply_price(&p);
 }
 
 fn rebuild(graph: &mut PricedGraph) {
