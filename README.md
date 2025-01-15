@@ -193,8 +193,19 @@ $r$ 跳削减图：
 - 这样的势函数满足：
   - 它是合法的，即不会把非负边转为负边。
     - 只需证明，对于非负边 $(u, v)$，有 $\varphi(v) \le \varphi(u) + w(u, v)$。
-    - 由 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) \le \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u) + w(u, v)$ 和 $\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) \le w(u, v) + \mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y)$：\
-      $$\begin{aligned} \varphi(v) &= \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v), -\mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y))) \\ &\le \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u) + w(u, v), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) + w(u, v))) \\ &= \min(-w(u, v), \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y))) + w(u, v) \\ &\le \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y))) + w(u, v) \\ &= \varphi(u) + w(u, v) \text{。} \end{aligned}$$
+    - 由 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) \le \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u) + w(u, v)$ 和 $\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) \le w(u, v) + \mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y)$：
+
+$$
+\begin{aligned}
+\varphi(v) &= \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v), -\mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y))) \\
+&\le \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u) + w(u, v), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) + w(u, v))) \\
+&= \min(-w(u, v), \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y))) + w(u, v) \\
+&\le \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y))) + w(u, v) \\
+&= \varphi(u) + w(u, v) \text{。}
+\end{aligned}
+$$
+
+- ${ }$
   - $\varphi(u) = 0$ 对所有 $u \in U$。
     - 因为 $\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) < 0$，故取负后 $> 0$，取 $\max$ 后仍 $> 0$，再取 $\min$ 后 $= 0$。
   - 对“大部分”其他点， $\varphi(v) \le \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v))$。
@@ -206,8 +217,18 @@ $r$ 跳削减图：
   - 根据上述，有 $\varphi(v) \le \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v))$。
   - 又对任意 $u \in U$ 有 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) \le \mathop{\text{dist}}\nolimits^1(x \rightsquigarrow u) + \mathop{\text{dist}}\nolimits^{\beta - 1}(u \rightsquigarrow v)$。
   - 然而，根据负夹心面包的定义，有 $\mathop{\text{dist}}\nolimits^1(x \rightsquigarrow u) < 0$，故 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) < \mathop{\text{dist}}\nolimits^{\beta - 1}(u \rightsquigarrow v)$。
-  - 然后是\
-    $$\begin{aligned} \mathop{\text{dist}}\nolimits_\varphi^{\beta - 1}(u \rightsquigarrow v) &= \mathop{\text{dist}}\nolimits^{\beta - 1}(u \rightsquigarrow v) + \varphi(u) - \varphi(v) \\ &> \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) + 0 - \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v)) \\ &= \max(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v)) \\ &\ge 0 \text{。} \end{aligned}$$
+  - 然后是
+
+$$
+\begin{aligned}
+\mathop{\text{dist}}\nolimits_\varphi^{\beta - 1}(u \rightsquigarrow v) &= \mathop{\text{dist}}\nolimits^{\beta - 1}(u \rightsquigarrow v) + \varphi(u) - \varphi(v) \\
+&> \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) + 0 - \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v)) \\
+&= \max(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v)) \\
+&\ge 0 \text{。}
+\end{aligned}
+$$
+
+- ${ }$
   - 故对“大部分”其他点 $v$，有 $\mathop{\text{dist}}\nolimits_\varphi^{\beta - 1}(U \rightsquigarrow v) > 0$。
 - 即 $R_\varphi^{\beta - 1}(U)$ 中只有可能包含 $\beta$ 介于 $x \rightsquigarrow y$ 之间的点，故 $\lvert R_\varphi^{\beta - 1}(U) \rvert \le n / \tau$。（对于 $U$，实际上有 $U$ 本身就 $\beta$ 介于 $x \rightsquigarrow y$ 之间。考察负夹心面包的定义即可知。）
 - 这就说明，在间性足够小的图中，负夹心面包的 $U$ 就给出了一个 $\min(\tau, \beta - 1)$ 遥远负边集。
