@@ -24,6 +24,34 @@ fn final_price(graph: &mut PricedGraph) -> Result<(), ()> {
 }
 
 fn eliminate_once(graph: &mut PricedGraph) -> Result<(), ()> {
+    let k = graph.nedges.iter().map(|edges| edges.len()).sum::<usize>();
+    assert!(k >= 1);
+    let r = (((k as f64).powf(1. / 9.).ceil() + 0.5) as usize).clamp(1, k);
+    let r_remote = loop {
+        let p1 = betweenness_reduction::betweenness_reduction(graph, r + 1, r)?;
+        let result = finding_sandwich::finding_sandwich(graph)?;
+        let s = match result {
+            finding_sandwich::Sandwich(s) => s,
+            finding_sandwich::IndependentSet(i) => {
+                eliminate_independent_set(graph, &i);
+                return Ok(());
+            }
+        };
+        let (x, u, y) = s;
+        let p2 = sandwiches_to_r_remoteness::sandwiches_to_r_remoteness(graph, x, &u, y, r + 1);
+        let size = negative_h_hop_reach(graph.as_borrowed(), r, &u).len();
+        if size * r > graph.n {
+            graph.unapply_price(&p2);
+            graph.unapply_price(&p1);
+            continue;
+        }
+        break u;
+    };
+    hop_reduction::hop_reduction(graph, &r_remote, r)?;
+    Ok(())
+}
+
+fn eliminate_independent_set(graph: &mut PricedGraph, i: &[usize]) {
     unimplemented!()
 }
 
