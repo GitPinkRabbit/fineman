@@ -37,10 +37,30 @@ impl PricedGraph {
         assert_eq!(self.nedges.len(), n);
         assert_eq!(self.nedges_rev.len(), n);
         assert_eq!(self.prices.len(), n);
-        assert_eq!(self.pedges.iter().all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)), true);
-        assert_eq!(self.pedges_rev.iter().all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)), true);
-        assert_eq!(self.nedges.iter().all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)), true);
-        assert_eq!(self.nedges_rev.iter().all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)), true);
+        assert_eq!(
+            self.pedges
+                .iter()
+                .all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)),
+            true
+        );
+        assert_eq!(
+            self.pedges_rev
+                .iter()
+                .all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)),
+            true
+        );
+        assert_eq!(
+            self.nedges
+                .iter()
+                .all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)),
+            true
+        );
+        assert_eq!(
+            self.nedges_rev
+                .iter()
+                .all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)),
+            true
+        );
     }
 
     pub fn apply_price(&mut self, p: &[i64]) {
