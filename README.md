@@ -81,7 +81,7 @@
 
 Johnson 技巧 / pricing / 点势函数：
 
-- 函数 $\varphi \colon V \to \R$，定义新边权 $w_{\varphi}(u, v) = w(u, v) + \varphi(u) - \varphi(v)$。
+- 函数 $\varphi \colon V \to \mathbb{R}$，定义新边权 $w_{\varphi}(u, v) = w(u, v) + \varphi(u) - \varphi(v)$。
 - 新图中的最短路保持不变，即 $\mathop{\text{dist}}\nolimits_\varphi(u \rightsquigarrow v) = \mathop{\text{dist}}\nolimits(u \rightsquigarrow v) + \varphi(u) - \varphi(v)$，或等价地， $\mathop{\text{dist}}\nolimits(u \rightsquigarrow v) = \mathop{\text{dist}}\nolimits_\varphi(u \rightsquigarrow v) - \varphi(u) + \varphi(v)$。
 - 对于任意的 $\varphi$，需要保证它不会将非负边转为负边，即 $w_{\varphi}(u, v) \ge 0$ 对所有 $(u, v) \in E^+$。
 - 如果同时对一条负边 $(u, v)$ 有 $w(u, v) + \varphi(u) - \varphi(v) \ge 0$，就相当于消除了一条负边。
