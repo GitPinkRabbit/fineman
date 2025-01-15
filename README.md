@@ -285,7 +285,20 @@ $$
   - 即重点在 $R^1(U')$ 中的概率 $q_\mathrm{H} \ge 6 / 7$，轻点在 $R^1(U')$ 中的概率 $q_\mathrm{L} \le 1 / 8$。
   - 且上述事件，固定一个重点或轻点后，在进行独立的对 $U'$ 的采样时，是独立的。
   - 故根据 Chernoff–Hoeffding 定理，重复 $\lceil c \ln n \rceil$ 次采样后，对固定的一个重点或轻点，它在 $R^1(U')$ 中的次数 $\ge \lceil c \ln n \rceil / 2$ 的概率有计算：
-    - 对重点， $\ge 1 - \Pr(X \le (1 / 2) \lceil c \ln n \rceil) \ge 1 - \Pr(X \le \mu - (q_\mathrm{H} - 1 / 2) \lceil c \ln n \rceil) \ge 1 - \biggl( \Bigl( \dfrac{q_\mathrm{H}}{1 / 2} \Bigr)^{1 / 2} \Bigl( \dfrac{1 - q_\mathrm{H}}{1 / 2} \Bigr)^{1 / 2} \biggr)^{\lceil c \ln n \rceil} \ge 1 - ((1 / \mathrm{e})^{1 / 3})^{\lceil c \ln n \rceil} \ge 1 - 1 / n^{c / 3}$。
+    - 对重点，
+
+$$
+\begin{aligned}
+&\ge 1 - \Pr(X \le (1 / 2) \lceil c \ln n \rceil) \\
+&\ge 1 - \Pr(X \le \mu - (q_\mathrm{H} - 1 / 2) \lceil c \ln n \rceil) \\
+&\ge 1 - \biggl( \Bigl( \dfrac{q_\mathrm{H}}{1 / 2} \Bigr)^{1 / 2} \Bigl( \dfrac{1 - q_\mathrm{H}}{1 / 2} \Bigr)^{1 / 2} \biggr)^{\lceil c \ln n \rceil} \\
+&\ge 1 - ((1 / \mathrm{e})^{1 / 3})^{\lceil c \ln n \rceil} \\
+&\ge 1 - 1 / n^{c / 3} \text{。}
+\end{aligned}
+$$
+
+- ${ }$
+  - ${ }$
     - 对轻点，类似地， $\le 1 / n^{c / 3}$。
   - 再根据事件的并的概率不超过各事件概率之和，有所有重点都在 $H$ 中，所有轻点都在 $L$ 中的概率 $\ge 1 - 1 / n^{c / 3 - 1}$。
   - 上述算法的时间复杂度为 $O((m + n \log n) \log n)$，因为需要重复 $\Theta(\log n)$ 次采样和计算，而每次计算 $R^1(U')$ 的时间为 $O(m + n \log n)$。
