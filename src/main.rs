@@ -1,6 +1,9 @@
 mod graph;
+
 mod standard_algorithms;
+
 mod fineman_algorithm;
+
 use rand::prelude::*;
 
 fn main() {
