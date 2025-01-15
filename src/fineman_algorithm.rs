@@ -8,6 +8,7 @@ mod sandwiches_to_r_remoteness;
 
 mod hop_reduction;
 
+use crate::graph::*;
 use crate::standard_algorithms::*;
 
 #[derive(Debug, Clone)]
@@ -47,30 +48,30 @@ impl PricedGraph {
         assert_eq!(self.nedges.len(), n);
         assert_eq!(self.nedges_rev.len(), n);
         assert_eq!(self.prices.len(), n);
-        assert_eq!(
-            self.pedges
-                .iter()
-                .all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)),
-            true
-        );
-        assert_eq!(
-            self.pedges_rev
-                .iter()
-                .all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)),
-            true
-        );
-        assert_eq!(
-            self.nedges
-                .iter()
-                .all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)),
-            true
-        );
-        assert_eq!(
-            self.nedges_rev
-                .iter()
-                .all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)),
-            true
-        );
+        assert!(self
+            .pedges
+            .iter()
+            .all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)));
+        assert!(self
+            .pedges_rev
+            .iter()
+            .all(|edges_u| edges_u.iter().all(|&(v, w)| v < n && w >= 0)));
+        assert!(self
+            .nedges
+            .iter()
+            .all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)));
+        assert!(self
+            .nedges_rev
+            .iter()
+            .all(|edges_u| edges_u.iter().all(|&(v, _, _)| v < n)));
+    }
+
+    pub fn check_eliminated(&self) {
+        // if cfg!(not(debug_assertions)) {
+        //     return;
+        // }
+        self.sanity_check();
+        assert!(self.nedges.iter().map(|edges_u| edges_u.len()).sum::<usize>() == 0);
     }
 
     pub fn apply_price(&mut self, p: &[i64]) {
@@ -107,7 +108,39 @@ impl PricedGraph {
     }
 }
 
-pub fn bellman_ford_dijkstra_up_to_h_hops(
+impl From<ProperGraph> for PricedGraph {
+    fn from(graph: ProperGraph) -> Self {
+        let n = graph.n;
+        let mut pedges = vec![vec![]; n];
+        let mut pedges_rev = vec![vec![]; n];
+        let mut nedges = vec![vec![]; n];
+        let mut nedges_rev = vec![vec![]; n];
+        for u in 0..n {
+            for &(v, w) in &graph.edges[u] {
+                if w >= 0 {
+                    pedges[u].push((v, w));
+                    pedges_rev[v].push((u, w));
+                } else {
+                    nedges[u].push((v, w, true));
+                    nedges_rev[v].push((u, w, true));
+                }
+            }
+        }
+        let prices = vec![0; n];
+        let priced_graph = PricedGraph {
+            n,
+            pedges,
+            pedges_rev,
+            nedges,
+            nedges_rev,
+            prices,
+        };
+        priced_graph.sanity_check();
+        priced_graph
+    }
+}
+
+fn bellman_ford_dijkstra_up_to_h_hops(
     graph: BorrowedWeightedGraph<'_>,
     h: usize,
     mut dist: Vec<Option<i64>>,
@@ -129,7 +162,7 @@ pub fn bellman_ford_dijkstra_up_to_h_hops(
     dist
 }
 
-pub fn bellman_ford_dijkstra_up_to_h_hops_with_origins(
+fn bellman_ford_dijkstra_up_to_h_hops_with_origins(
     graph: BorrowedWeightedGraph<'_>,
     h: usize,
     mut dist: Vec<Option<(i64, usize)>>,
@@ -151,7 +184,7 @@ pub fn bellman_ford_dijkstra_up_to_h_hops_with_origins(
     dist
 }
 
-pub fn bellman_ford_dijkstra_with_hops_bound(
+fn bellman_ford_dijkstra_with_hops_bound(
     graph: BorrowedWeightedGraph<'_>,
     h: usize,
 ) -> Result<Vec<i64>, ()> {
@@ -186,11 +219,7 @@ pub fn bellman_ford_dijkstra_with_hops_bound(
     Ok(dist.into_iter().map(|d| d.unwrap()).collect())
 }
 
-pub fn negative_h_hop_reach(
-    graph: BorrowedWeightedGraph<'_>,
-    h: usize,
-    start: &[usize],
-) -> Vec<usize> {
+fn negative_h_hop_reach(graph: BorrowedWeightedGraph<'_>, h: usize, start: &[usize]) -> Vec<usize> {
     let mut dist = vec![None; graph.n];
     for &u in start {
         dist[u] = Some(0);
