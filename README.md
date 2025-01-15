@@ -43,7 +43,7 @@
 **负 $\boldsymbol{h}$ 跳可达范围**：定义一个点 $u$ 的**负 $\boldsymbol{h}$ 跳可达范围**为：
 
 - 从 $u$ 出发经过一个负 $h$ 跳路径可达的点集。
-- 进一步，定义一个点集 $S$ 的**负 $\boldsymbol{h}$ 跳可达范围**为\ 
+- 进一步，定义一个点集 $S$ 的**负 $\boldsymbol{h}$ 跳可达范围**为\
   $$R^h(S) = \{ v \in V : \mathop{\text{dist}}\nolimits^h(S \rightsquigarrow v) < 0 \} \text{。}$$
 - 简单性质：
   - $R^h(S) = \bigcup_{u \in S} R^h(u)$。
@@ -165,7 +165,7 @@ $r$ 跳削减图：
 - 由于特殊点是随机选取的，而 $\mathop{\text{thru}}\nolimits^\beta$ 只要比某个特殊点 $x$ 的 $\mathop{\text{thru}}\nolimits^\beta$ 大，就有 $\mathop{\text{thru}}\nolimits_\varphi^\beta \ge 0$。
 - 对于一个特定的 $u \rightsquigarrow v$， $\mathop{\text{BW}}\nolimits^\beta(u \rightsquigarrow v) > n / \tau$ 的概率有上界：
   - $[1, n]$ 中均匀随机选 $T = \Theta(\tau \log n)$ 个数，最小的数的编号大于 $n / \tau$ 的概率。
-  - 即\ 
+  - 即\
     $$\prod_{i = 0}^{T - 1} \frac{n - n / \tau - i}{n - i} \le \prod_{i = 0}^{T - 1} \frac{n - n / \tau}{n} = \Bigl( 1 - \frac{1}{\tau} \Bigr)^T = \biggl( \Bigl( 1 - \frac{1}{\tau} \Bigr)^{\tau} \biggr)^{\Theta(\log n)} \le \frac{1}{n^{\Theta(1)}} \text{。}$$
 - 再根据事件的并的概率不超过各事件概率之和，有该势函数满足每对点的条件的概率不小于 $1 - 1 / n^{\Theta(1) - 2}$。
 - 现在的问题是，如何找到这样的势函数。（使得所有从特殊点出发或到达特殊点的 $\beta$ 跳距离都非负。）
@@ -187,20 +187,14 @@ $r$ 跳削减图：
 
 下面我们展示如何通过负夹心面包找到一个足够大的 $r$ 遥远负边集：
 
-- 对一个负夹心面包 $(x, U, y)$ 和一个跳数 $\beta \ge 1$，考虑使用势函数\ 
+- 对一个负夹心面包 $(x, U, y)$ 和一个跳数 $\beta \ge 1$，考虑使用势函数\
   $$\varphi(v) = \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v), -\mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y))) \text{。}$$
   这个势函数在 $O(\beta (m + n \log n))$ 时间内可以计算出来。
 - 这样的势函数满足：
   - 它是合法的，即不会把非负边转为负边。
     - 只需证明，对于非负边 $(u, v)$，有 $\varphi(v) \le \varphi(u) + w(u, v)$。
-    - 由 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) \le \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u) + w(u, v)$ 和 $\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) \le w(u, v) + \mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y)$：\ 
-      $$\begin{aligned}
-        \varphi(v) &= \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v), -\mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y))) \\
-        &\le \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u) + w(u, v), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) + w(u, v))) \\
-        &= \min(-w(u, v), \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y))) + w(u, v) \\
-        &\le \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y))) + w(u, v) \\
-        &= \varphi(u) + w(u, v) \text{。}
-      \end{aligned}$$
+    - 由 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) \le \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u) + w(u, v)$ 和 $\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) \le w(u, v) + \mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y)$：\
+      $$\begin{aligned} \varphi(v) &= \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v), -\mathop{\text{dist}}\nolimits^\beta(v \rightsquigarrow y))) \\ &\le \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u) + w(u, v), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) + w(u, v))) \\ &= \min(-w(u, v), \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y))) + w(u, v) \\ &\le \min(0, \max(\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow u), -\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y))) + w(u, v) \\ &= \varphi(u) + w(u, v) \text{。} \end{aligned}$$
   - $\varphi(u) = 0$ 对所有 $u \in U$。
     - 因为 $\mathop{\text{dist}}\nolimits^\beta(u \rightsquigarrow y) < 0$，故取负后 $> 0$，取 $\max$ 后仍 $> 0$，再取 $\min$ 后 $= 0$。
   - 对“大部分”其他点， $\varphi(v) \le \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v))$。
@@ -212,13 +206,8 @@ $r$ 跳削减图：
   - 根据上述，有 $\varphi(v) \le \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v))$。
   - 又对任意 $u \in U$ 有 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) \le \mathop{\text{dist}}\nolimits^1(x \rightsquigarrow u) + \mathop{\text{dist}}\nolimits^{\beta - 1}(u \rightsquigarrow v)$。
   - 然而，根据负夹心面包的定义，有 $\mathop{\text{dist}}\nolimits^1(x \rightsquigarrow u) < 0$，故 $\mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) < \mathop{\text{dist}}\nolimits^{\beta - 1}(u \rightsquigarrow v)$。
-  - 然后是\ 
-    $$\begin{aligned}
-      \mathop{\text{dist}}\nolimits_\varphi^{\beta - 1}(u \rightsquigarrow v) &= \mathop{\text{dist}}\nolimits^{\beta - 1}(u \rightsquigarrow v) + \varphi(u) - \varphi(v) \\
-      &> \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) + 0 - \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v)) \\
-      &= \max(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v)) \\
-      &\ge 0 \text{。}
-    \end{aligned}$$
+  - 然后是\
+    $$\begin{aligned} \mathop{\text{dist}}\nolimits_\varphi^{\beta - 1}(u \rightsquigarrow v) &= \mathop{\text{dist}}\nolimits^{\beta - 1}(u \rightsquigarrow v) + \varphi(u) - \varphi(v) \\ &> \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v) + 0 - \min(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v)) \\ &= \max(0, \mathop{\text{dist}}\nolimits^\beta(x \rightsquigarrow v)) \\ &\ge 0 \text{。} \end{aligned}$$
   - 故对“大部分”其他点 $v$，有 $\mathop{\text{dist}}\nolimits_\varphi^{\beta - 1}(U \rightsquigarrow v) > 0$。
 - 即 $R_\varphi^{\beta - 1}(U)$ 中只有可能包含 $\beta$ 介于 $x \rightsquigarrow y$ 之间的点，故 $\lvert R_\varphi^{\beta - 1}(U) \rvert \le n / \tau$。（对于 $U$，实际上有 $U$ 本身就 $\beta$ 介于 $x \rightsquigarrow y$ 之间。考察负夹心面包的定义即可知。）
 - 这就说明，在间性足够小的图中，负夹心面包的 $U$ 就给出了一个 $\min(\tau, \beta - 1)$ 遥远负边集。
